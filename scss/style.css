@@ -1,0 +1,197 @@
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Roboto mono", monospace;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.navbar {
+  position: sticky;
+}
+.navbar .navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(230, 227, 227, 0.059);
+  color: black;
+  padding: 9px;
+  height: 50px;
+  height: 100%;
+  gap: 10px;
+}
+.navbar .navbar-collapse .logo_luma {
+  width: 50px;
+}
+.navbar .navbar-collapse .nav-item .elem-item:hover {
+  background-color: gray;
+}
+
+.banner-pic {
+  width: 100%;
+  height: 600px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  padding: 10px;
+}
+
+.text_ind {
+  display: flex;
+  justify-content: center;
+}
+
+.main_index {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+.main_index .card-group {
+  gap: 20px;
+}
+.main_index .card-group .card {
+  min-width: 300px;
+}
+.main_index .card-group .card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+footer {
+  margin-top: 100px;
+}
+
+.iconos_foot {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-right: 20px;
+}
+.iconos_foot .bi {
+  font-size: 30px;
+}
+
+.nav_footer {
+  width: 100%;
+}
+.nav_footer .iconos_foot {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.nav_footer .nav-foot {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  padding: 10px;
+  justify-content: center;
+  flex-direction: row;
+}
+.nav_footer .nav-foot a {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+.main_nosotros {
+  width: 100%;
+}
+.main_nosotros .text_princnos {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+
+.secccion_remeras,
+.seccion_buzos,
+.seccion_jean {
+  padding: 20px;
+}
+.secccion_remeras .card-body,
+.seccion_buzos .card-body,
+.seccion_jean .card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.secccion_remeras .card-footer .boton_prod,
+.seccion_buzos .card-footer .boton_prod,
+.seccion_jean .card-footer .boton_prod {
+  display: flex;
+  justify-content: center;
+}
+.secccion_remeras .card-footer .boton_prod .btn:hover,
+.seccion_buzos .card-footer .boton_prod .btn:hover,
+.seccion_jean .card-footer .boton_prod .btn:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.card-complete {
+  transition: 0.6s ease all;
+}
+.card-complete:hover {
+  transform: scale(1.05, 1.05);
+}
+
+.active-item {
+  background-color: gray !important;
+  padding: 5px;
+}
+
+.card-vendedores {
+  margin-top: 77px;
+}
+.card-vendedores .card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.main_cambios {
+  margin-top: 30px;
+  width: 100%;
+}
+.main_cambios .tit_camb {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+section .text_princnos {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+
+div iframe {
+  width: 500px;
+  height: 400px;
+  margin-top: 50px;
+}
+
+.lista_contact {
+  list-style-type: none;
+  padding: 10px;
+}
+.lista_contact i {
+  margin-right: 15px;
+}
+
+.contact {
+  margin-top: 100px;
+}
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    order: -1;
+  }
+}/*# sourceMappingURL=style.css.map */
