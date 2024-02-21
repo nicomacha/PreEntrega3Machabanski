@@ -220,7 +220,7 @@ function addToCart(remera) {
     position: "center", // `left`, `center` or `right`
     stopOnFocus: true, // Prevents dismissing of toast on hover
     style: {
-      background: "linear-gradient(to right, #000, #000)",
+      background: "linear-gradient(to right, #008000, #008000)",
     },
   }).showToast();
 }
@@ -234,9 +234,9 @@ function templateProductCart(producto) {
           <div class="p-3">
             <h4>${producto.nombre}</h4>
             <p>$${producto.precio}</p>
-            <p>${producto.cuotas} cuotas de ${
+            <p>${producto.cuotas} cuotas de ${Number(
     producto.precio / producto.cuotas
-  }</p>
+  ).toFixed(2)}</p>
             <button type="button" class="btn btn-danger" onclick="deleteProductoToCart(${JSON.stringify(
               producto.id
             )})">Eliminar</button>
