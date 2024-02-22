@@ -14,7 +14,7 @@ const productos = [
   {
     id: 1,
     nombre: "Remera White",
-    imagen: "./img/remera_blanca.jpg",
+    imagen: "../img/remera_blanca.jpg",
     color: "Blanco",
     precio: 4500,
     cuotas: 3,
@@ -44,7 +44,7 @@ const productos = [
   {
     id: 3,
     nombre: "Remera Black",
-    imagen: "img/remera_negra.jpg",
+    imagen: "../img/remera_negra.jpg",
     color: "Negro",
     precio: 8000,
     cuotas: 3,
@@ -59,7 +59,7 @@ const productos = [
   {
     id: 4,
     nombre: "Jean Sky Blue",
-    imagen: "/img/jean_celeste.jpg",
+    imagen: "../img/jean_celeste.jpg",
     color: "Azul",
     precio: 17000,
     cuotas: 3,
@@ -74,7 +74,7 @@ const productos = [
   {
     id: 5,
     nombre: "Jean Navy Blue",
-    imagen: "/img/jean_marino.jpg",
+    imagen: "../img/jean_marino.jpg",
     color: "Negro",
     precio: 15000,
     cuotas: 3,
@@ -89,7 +89,7 @@ const productos = [
   {
     id: 6,
     nombre: "Jean Worn Out",
-    imagen: "/img/jean_desgastad.jpg",
+    imagen: "../img/jean_desgastad.jpg",
     color: "Celeste",
     precio: 4500,
     cuotas: 3,
@@ -104,7 +104,7 @@ const productos = [
   {
     id: 7,
     nombre: "Buzo Grey",
-    imagen: "/img/buzo_gris.jpg",
+    imagen: "../img/buzo_gris.jpg",
     color: "Gris",
     precio: 16000,
     cuotas: 3,
@@ -119,7 +119,7 @@ const productos = [
   {
     id: 8,
     nombre: "Buzo Yellow",
-    imagen: "/img/buzo_amarillo.jpg",
+    imagen: "../img/buzo_amarillo.jpg",
     color: "Amarillo",
     precio: 14000,
     cuotas: 3,
@@ -134,7 +134,7 @@ const productos = [
   {
     id: 9,
     nombre: "Buzo White",
-    imagen: "/img/buzo_blanco.jpg",
+    imagen: "../img/buzo_blanco.jpg",
     color: "Blanco",
     precio: 19000,
     cuotas: 3,
