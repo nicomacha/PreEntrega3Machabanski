@@ -14,7 +14,7 @@ const productos = [
   {
     id: 1,
     nombre: "Remera White",
-    imagen: "../img/remera_blanca.jpg",
+    imagen: "./img/remera_blanca.jpg",
     color: "Blanco",
     precio: 4500,
     cuotas: 3,
@@ -29,7 +29,7 @@ const productos = [
   {
     id: 2,
     nombre: "Remera Green",
-    imagen: "/img/remera_verde.jpg",
+    imagen: "../img/remera_verde.jpg",
     color: "Verde",
     precio: 6000,
     cuotas: 3,
@@ -44,7 +44,7 @@ const productos = [
   {
     id: 3,
     nombre: "Remera Black",
-    imagen: "/img/remera_negra.jpg",
+    imagen: "img/remera_negra.jpg",
     color: "Negro",
     precio: 8000,
     cuotas: 3,
