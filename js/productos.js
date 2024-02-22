@@ -14,7 +14,7 @@ const productos = [
   {
     id: 1,
     nombre: "Remera White",
-    imagen: "/img/remera_blanca.jpg",
+    imagen: "../img/remera_blanca.jpg",
     color: "Blanco",
     precio: 4500,
     cuotas: 3,
