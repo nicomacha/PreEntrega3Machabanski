@@ -9,8 +9,8 @@ const $sumaTotal = document.getElementById("suma-total");
 // Variables con datos;
 let cart = [];
 const storageGuardado = JSON.parse(localStorage.getItem("enCarrito"));
-
-const productos = [
+let productos;
+/* const productos = [
   {
     id: 1,
     nombre: "Remera White",
@@ -146,7 +146,7 @@ const productos = [
       { talle: "XXL" },
     ],
   },
-];
+]; */
 
 if (storageGuardado) {
   cart = storageGuardado;
@@ -162,12 +162,23 @@ function totalCart() {
     return precioAnterior + producto.precio;
   }, 0);
 
-  console.log("sumando" + resultado);
-
   return resultado;
 }
 
 totalCart();
+cargarJson();
+console.log(productos);
+function cargarJson() {
+  fetch("/producto.json")
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      data.forEach((producto) => {
+        $containerRemeras.innerHTML += templateRemera(producto);
+      });
+    });
+}
 
 function templateRemera(remera) {
   return `<div class="col card_remera">
@@ -271,10 +282,6 @@ function deleteProductoToCart(id) {
   window.localStorage.setItem("enCarrito", JSON.stringify(cart));
   $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
 }
-
-productos.forEach((producto) => {
-  $containerRemeras.innerHTML += templateRemera(producto);
-});
 
 const carritoLs = JSON.parse(localStorage.getItem("enCarrito"));
 
