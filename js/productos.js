@@ -169,7 +169,9 @@ totalCart();
 cargarJson();
 console.log(productos);
 function cargarJson() {
-  fetch("/producto.json")
+  fetch(
+    "https://raw.githubusercontent.com/nicomacha/productosFetch/main/producto.json"
+  )
     .then(function (res) {
       return res.json();
     })
