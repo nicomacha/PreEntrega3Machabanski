@@ -197,13 +197,13 @@ function deleteProductoToCart(id) {
     window.localStorage.setItem("enCarrito", JSON.stringify(cart));
     $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
     Toastify({
-      text: "Producto agregado al carrito",
+      text: "Producto eliminado del carrito",
       duration: 1000,
       gravity: "top", // `top` or `bottom`
       position: "center", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       style: {
-        background: "linear-gradient(to right, #008000, #008000)",
+        background: "linear-gradient(to right, #e05d44, #e05d44)",
       },
     }).showToast();
   } else {
