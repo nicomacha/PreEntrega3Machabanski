@@ -18,7 +18,7 @@ if (storageGuardado) {
     $cartList.innerHTML += templateProductCart(product);
   });
 }
-console.log(cart);
+
 // Funciones
 function totalCart() {
   const resultado = cart.reduce((precioAnterior, producto) => {
@@ -31,10 +31,8 @@ function totalCart() {
 
   return resultado;
 }
-
 totalCart();
 cargarJson();
-console.log(productos);
 function cargarJson() {
   fetch(
     "https://raw.githubusercontent.com/nicomacha/productosFetch/main/producto.json"
@@ -96,19 +94,12 @@ function templateRemera(remera) {
 </div>`;
 }
 
-/*
-1. validar si el producto que viene por parametro existe en el array cart, cambiar la propiedad cantidad si es uno, pasar 2 (++)
-
-*/
-
 function addToCart(remera) {
   $cartList.innerHTML = "";
   const elProductoExisteEnElCarrito = cart.some((producto) => {
     return producto.id === remera.id;
   });
-  console.log(
-    "el producto existe en el carrito?" + " " + elProductoExisteEnElCarrito
-  );
+
   if (elProductoExisteEnElCarrito) {
     const productoEncontrado = cart.find((producto) => {
       return producto.id === remera.id;
@@ -132,7 +123,6 @@ function addToCart(remera) {
         background: "linear-gradient(to right, #008000, #008000)",
       },
     }).showToast();
-    console.log(cart);
   } else {
     remera.cantidad = 1;
     cart.push(remera);
@@ -179,29 +169,68 @@ function templateProductCart(producto) {
 
 function deleteProductoToCart(id) {
   $cartList.innerHTML = "";
-  const carritoModificado = cart.filter((producto) => {
-    if (producto.id !== id) {
-      return producto;
+  const elProductoExisteEnElCarrito = cart.some((producto) => {
+    return producto.id === id;
+  });
+
+  if (elProductoExisteEnElCarrito) {
+    const productoEncontrado = cart.find((producto) => {
+      return producto.id === id;
+    });
+
+    productoEncontrado.cantidad--;
+
+    if (productoEncontrado.cantidad === 0) {
+      const carritoModificado = cart.filter((producto) => {
+        if (producto.id !== id) {
+          return producto;
+        }
+      });
+      cart = carritoModificado;
     }
-  });
-  cart = carritoModificado;
-  cart.forEach((producto) => {
-    $cartList.innerHTML += templateProductCart(producto);
-  });
-  totalCart();
-  $cartCount.textContent = cart.length;
-  Toastify({
-    text: "Producto eliminado del carrito",
-    duration: 1000,
-    gravity: "top", // `top` or `bottom`
-    position: "center", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "linear-gradient(to right, #e05d44, #e05d44)",
-    },
-  }).showToast();
-  window.localStorage.setItem("enCarrito", JSON.stringify(cart));
-  $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
+
+    $cartCount.textContent = cart.length;
+    totalCart();
+    cart.forEach((product) => {
+      $cartList.innerHTML += templateProductCart(product);
+    });
+    window.localStorage.setItem("enCarrito", JSON.stringify(cart));
+    $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
+    Toastify({
+      text: "Producto agregado al carrito",
+      duration: 1000,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #008000, #008000)",
+      },
+    }).showToast();
+  } else {
+    const carritoModificado = cart.filter((producto) => {
+      if (producto.id !== id) {
+        return producto;
+      }
+    });
+    cart = carritoModificado;
+    cart.forEach((producto) => {
+      $cartList.innerHTML += templateProductCart(producto);
+    });
+    totalCart();
+    $cartCount.textContent = cart.length;
+    Toastify({
+      text: "Producto eliminado del carrito",
+      duration: 1000,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #e05d44, #e05d44)",
+      },
+    }).showToast();
+    window.localStorage.setItem("enCarrito", JSON.stringify(cart));
+    $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
+  }
 }
 
 const carritoLs = JSON.parse(localStorage.getItem("enCarrito"));
