@@ -10,143 +10,6 @@ const $sumaTotal = document.getElementById("suma-total");
 let cart = [];
 const storageGuardado = JSON.parse(localStorage.getItem("enCarrito"));
 let productos;
-/* const productos = [
-  {
-    id: 1,
-    nombre: "Remera White",
-    imagen: "../img/remera_blanca.jpg",
-    color: "Blanco",
-    precio: 4500,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 2,
-    nombre: "Remera Green",
-    imagen: "../img/remera_verde.jpg",
-    color: "Verde",
-    precio: 6000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 3,
-    nombre: "Remera Black",
-    imagen: "../img/remera_negra.jpg",
-    color: "Negro",
-    precio: 8000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 4,
-    nombre: "Jean Sky Blue",
-    imagen: "../img/jean_celeste.jpg",
-    color: "Azul",
-    precio: 17000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 5,
-    nombre: "Jean Navy Blue",
-    imagen: "../img/jean_marino.jpg",
-    color: "Negro",
-    precio: 15000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 6,
-    nombre: "Jean Worn Out",
-    imagen: "../img/jean_desgastad.jpg",
-    color: "Celeste",
-    precio: 4500,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 7,
-    nombre: "Buzo Grey",
-    imagen: "../img/buzo_gris.jpg",
-    color: "Gris",
-    precio: 16000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 8,
-    nombre: "Buzo Yellow",
-    imagen: "../img/buzo_amarillo.jpg",
-    color: "Amarillo",
-    precio: 14000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-  {
-    id: 9,
-    nombre: "Buzo White",
-    imagen: "../img/buzo_blanco.jpg",
-    color: "Blanco",
-    precio: 19000,
-    cuotas: 3,
-    talles: [
-      { talle: "S" },
-      { talle: "M" },
-      { talle: "L" },
-      { talle: "XL" },
-      { talle: "XXL" },
-    ],
-  },
-]; */
 
 if (storageGuardado) {
   cart = storageGuardado;
@@ -159,7 +22,11 @@ console.log(cart);
 // Funciones
 function totalCart() {
   const resultado = cart.reduce((precioAnterior, producto) => {
-    return precioAnterior + producto.precio;
+    if (producto.cantidad > 1) {
+      return producto.cantidad * producto.precio;
+    } else {
+      return precioAnterior + producto.precio;
+    }
   }, 0);
 
   return resultado;
@@ -179,6 +46,19 @@ function cargarJson() {
       data.forEach((producto) => {
         $containerRemeras.innerHTML += templateRemera(producto);
       });
+    })
+    .catch((error) => {
+      console.log("Error al cargar los productos !");
+      Toastify({
+        text: "Error al cargar los productos !",
+        duration: 5000,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #e05d44, #e05d44)",
+        },
+      }).showToast();
     });
 }
 
@@ -216,26 +96,64 @@ function templateRemera(remera) {
 </div>`;
 }
 
+/*
+1. validar si el producto que viene por parametro existe en el array cart, cambiar la propiedad cantidad si es uno, pasar 2 (++)
+
+*/
+
 function addToCart(remera) {
   $cartList.innerHTML = "";
-  cart.push(remera);
-  $cartCount.textContent = cart.length;
-  totalCart();
-  cart.forEach((product) => {
-    $cartList.innerHTML += templateProductCart(product);
+  const elProductoExisteEnElCarrito = cart.some((producto) => {
+    return producto.id === remera.id;
   });
-  window.localStorage.setItem("enCarrito", JSON.stringify(cart));
-  $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
-  Toastify({
-    text: "Producto agregado al carrito",
-    duration: 1000,
-    gravity: "top", // `top` or `bottom`
-    position: "center", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "linear-gradient(to right, #008000, #008000)",
-    },
-  }).showToast();
+  console.log(
+    "el producto existe en el carrito?" + " " + elProductoExisteEnElCarrito
+  );
+  if (elProductoExisteEnElCarrito) {
+    const productoEncontrado = cart.find((producto) => {
+      return producto.id === remera.id;
+    });
+
+    productoEncontrado.cantidad++;
+    $cartCount.textContent = cart.length;
+    totalCart();
+    cart.forEach((product) => {
+      $cartList.innerHTML += templateProductCart(product);
+    });
+    window.localStorage.setItem("enCarrito", JSON.stringify(cart));
+    $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
+    Toastify({
+      text: "Producto agregado al carrito",
+      duration: 1000,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #008000, #008000)",
+      },
+    }).showToast();
+    console.log(cart);
+  } else {
+    remera.cantidad = 1;
+    cart.push(remera);
+    $cartCount.textContent = cart.length;
+    totalCart();
+    cart.forEach((product) => {
+      $cartList.innerHTML += templateProductCart(product);
+    });
+    window.localStorage.setItem("enCarrito", JSON.stringify(cart));
+    $sumaTotal.innerHTML = `<div>Total:${Number(totalCart()).toFixed(2)}</div>`;
+    Toastify({
+      text: "Producto agregado al carrito",
+      duration: 1000,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, #008000, #008000)",
+      },
+    }).showToast();
+  }
 }
 
 function templateProductCart(producto) {
@@ -247,6 +165,7 @@ function templateProductCart(producto) {
           <div class="p-3">
             <h4>${producto.nombre}</h4>
             <p>$${producto.precio}</p>
+            <p>Cantidad:${producto.cantidad}</p>
             <p>${producto.cuotas} cuotas de ${Number(
     producto.precio / producto.cuotas
   ).toFixed(2)}</p>
